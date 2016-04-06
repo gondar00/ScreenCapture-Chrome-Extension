@@ -1,0 +1,19 @@
+{
+   "background": {
+      "persistent": false,
+      "scripts": [ "background.js" ]
+   },
+   "browser_action": {
+      "default_title": "ScreenShot with annotation for Flutura hackathon"
+   },
+   "description": "Flutura",
+   "icons": {
+      "128": "icons/camera128.png",
+      "16": "icons/camera16.png",
+      "48": "icons/camera48.png"
+   },
+   "manifest_version": 2,
+   "name": "Flutura Screenshot + Annotation",
+   "permissions": [ "activeTab" ],
+   "version": "1.0"
+}

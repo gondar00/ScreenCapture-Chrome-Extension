@@ -1,0 +1,530 @@
+* {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 12px;
+    line-height: 150%;
+    letter-spacing: 0.15em;
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: lightgray;
+}
+
+li {
+    list-style: none;   
+    width: 100%;
+}
+
+canvas {
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.no-action button {
+    cursor: not-allowed;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.movable {
+    border: 1px solid #999;
+    border-radius: 2px;
+    box-shadow: 3px 3px 5px #666;  
+    cursor: move;
+}
+
+.parent-mover {
+    cursor: move;
+}
+
+/* --- welcome message & download confirmation --- */
+.start-up, body.notice-up::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    
+    z-index: 1001;
+}
+
+.welcome, .download-confirm {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%);
+    
+    height: 420px;
+    width: 450px;
+    
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    box-shadow: 3px 3px 5px #666;
+    
+    color: #111;
+    font-size: 105%;
+    padding: 25px 40px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.welcome {
+    z-index: 1002;
+}
+
+.welcome p, download-confirm p {
+    line-height: 200%;
+}
+
+.welcome p:nth-of-type(1) {
+    font-size: 120%;
+    font-weight: bold;
+    margin: 5px 0 15px;
+}
+
+.welcome em, .download-confirm em {
+    color: #000;
+    font-size: 125%;
+    font-style: normal;
+}
+
+.welcome div {
+    margin: 25px auto 30px;
+}
+
+.welcome label {
+    margin: 0 0 0 5px;
+}
+
+.welcome button, .download-confirm button {
+    border: 1px solid #999;
+    border-radius: 2px;
+    
+    padding: 10px 40px;
+    transition: padding 250ms ease-in-out;
+}
+
+.welcome button:hover, .download-confirm button:hover {
+    padding: 10px 60px;
+}
+
+.pointer {
+    position: absolute;
+    top: 100px;
+    right: 185px;
+    
+    -webkit-animation: pointer-spinner 300ms infinite;
+}
+
+@-webkit-keyframes pointer-spinner {
+    0% {
+        transform: rotate(20deg);
+    }
+    
+    10% {
+        transform: rotate(22deg);   
+    }
+
+    20% {
+        transform: rotate(24deg);   
+    }
+    
+    30% {
+        transform: rotate(26deg);   
+    }
+    
+    40% {
+        transform: rotate(28deg);   
+    }
+
+    50% {
+        transform: rotate(30deg);   
+    }
+    
+    60% {
+        transform: rotate(28deg);   
+    }
+    
+    70% {
+        transform: rotate(26deg);   
+    }
+    
+    80% {
+        transform: rotate(24deg);   
+    }
+    
+    90% {
+        transform: rotate(22deg);   
+    }
+    
+    100% {
+        transform: rotate(20deg);
+    }
+}
+
+.start-up .highlight, .start-up .black-out, .start-up .add-note, .start-up .download {
+    height: 40px;
+}
+
+.download-confirm {
+    width: 375px;
+    height: 300px;
+    padding: 20px 40px;
+    opacity: 0;
+    
+    transform: translate(-50%, -75%);
+    transition: opacity 200ms ease-in-out;
+}
+
+.notice-up .download-confirm {
+    opacity: 1;
+    z-index: 1002;
+}
+
+body.notice-up::before {
+    content: "";
+}
+
+.download-confirm p {
+    margin: 10px 0 25px 0;  
+}
+
+/* --- toobar --- */
+
+.tools {
+    position: absolute;
+    right: 100px;
+    top: 75px;
+
+    height: 310px;
+    width: 70px;
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    
+    z-index: 1000;
+}
+
+.tools button {
+    position: relative;
+    height: 40px;
+    width: 100%;
+}
+
+.highlight {
+    background: url(icons/highlight.png) no-repeat 50%/contain;
+}
+
+.black-out {
+    background: url(icons/blackout.png) no-repeat 50%/contain;
+}
+
+.add-note {
+    background: url(icons/pencil.png) no-repeat 50%/contain;
+}
+
+.download {
+    background: url(icons/download.png) no-repeat 50%/contain;
+}
+
+.tools button:hover::after {
+    position: absolute;
+    top: 15%;
+    left: 85%;
+    
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px #999;
+
+    width: 100px;
+    padding: 5px 0;
+}
+
+.no-action .tools button:hover::after {
+    opacity: 0;
+}
+
+.tools button.highlight:hover::after {
+    content: "highlight";
+}
+
+.tools button.black-out:hover::after {
+    content: "blackout";
+}
+
+.tools button.add-note:hover::after {
+    content: "add a note";
+}
+
+.tools button.download:hover::after {
+    content: "download";
+}
+
+/* --- DOM elements added by the user -- */
+
+.box {
+    position: absolute;
+    top: 75px;
+    left: 75px;
+    
+    height: 55px;
+    width: 300px; 
+    min-height: 45px;
+    min-width: 25px;
+}
+
+.remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    height: 20px;
+    width: 20px;
+    
+    color: #666;
+    font-size: 1.5em;
+    line-height: initial;
+}
+
+.remove:hover {
+    font-weight: bold;
+}
+
+.no-action .remove:hover {
+    font-weight: normal;
+}
+
+.handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    
+    height: 20px;
+    width: 20px;
+    cursor: nwse-resize;
+}
+
+.handle::before, .handle::after {
+    position: absolute;
+    content: "";    
+    border-top: 1px solid #666;
+    transform: rotate(-45deg);
+}
+
+.handle::before {
+    right: -2px;
+    bottom: -2px;
+    
+    height: 8px;
+    width: 8px;
+}
+
+.handle::after {
+    right: -1px;
+    bottom: -1px;
+    
+    width: 4px;
+    height: 4px;
+}
+
+.highlight-box {
+    box-shadow: 0px 0px 10px 2px gray;
+}
+
+.highlight-box .handle::before {
+    right: 1px;
+    bottom: 1px;
+}
+
+.highlight-box .handle::after {
+    right: 2px;
+    bottom: 2px;
+}
+
+.blackout-box {
+    background-color: #000;
+    box-shadow: none;
+}
+
+.blackout-box .handle::before, .blackout-box .handle::after {
+    border-color: #fff;
+}
+
+.blackout-box .remove {
+    color: #fff;
+}
+
+.note {
+    width: auto;
+    height: auto;
+    min-height: 60px;
+    min-width: 60px;
+}
+
+.note::before {
+    position: absolute;
+    left: -10px;
+    top: 21px;  
+    
+    content: "";
+    width: 0;
+    height: 0;
+    
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 10px solid #999;
+}
+
+.note::after {
+    position: absolute;
+    left: -8px;
+    top: 22px;
+    
+    content: "";
+    width: 0;
+    height: 0;
+    
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 9px solid #fff;
+}
+
+.note .handle, .note .remove {
+    z-index: 1;
+}
+
+.note textarea, .mirror {
+    border: 20px solid #fff;
+    text-align: justify;
+    display: block;
+    
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.note textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+    
+    min-height: 100%;
+    min-width: 100%;
+    
+    resize: none;   
+}
+
+.mirror {
+    width: 200px;
+    overflow: hidden;
+}
+
+.confirmation {
+    position: absolute;
+    top: -140px;
+    left: 50%;
+    margin-left: -150px;
+    
+    width: 300px;
+    height: 135px;
+    
+    border: 1px solid #999;
+    border-top: none;
+    border-radius: 0px 0px 2px 2px;
+    box-shadow: 3px 3px 5px #666;  
+    background-color: #fff;
+    
+    text-align: center;
+    z-index: 1000;
+    transition: transform 500ms ease-in-out;
+}
+
+.confirmation.appear {
+    transform: translateY(140px);
+}
+
+.confirmation p {
+    font-size: 120%;
+    text-align: center;
+    cursor: default;
+    font-weight: bold;
+    padding: 30px 0 25px 0;
+}
+
+.confirmation button{
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+
+.no-action .confirmation button {
+    cursor: pointer;
+}
+
+.delYes {
+    background: url("icons/yes.png") no-repeat 50%/contain;    
+    margin: 0px 25px 0 0;
+}
+
+.delNo {
+    background: url("icons/no.png") no-repeat 50%/contain;   
+    margin: 0 0 0 25px;
+}
+
+.confirmation button:hover::after {
+    position: absolute;
+    top: 0;
+    
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px #999;
+
+    padding: 5px 0;
+}
+
+.delYes:hover::after {
+    content: "Yes, delete this note";   
+    right: 35px;
+    width: 165px;
+}
+
+.delNo:hover::after {
+    content: "No, don't delete this note";   
+    left: 35px;
+    width: 200px
+}
+
+.hide {
+    display: none;
+}
+
+.top {
+    z-index: 100;   
+}

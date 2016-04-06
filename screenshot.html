@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!--
+    created by: Abby Yang @ Sandcastle Studios
+    icons by: http://dryicons.com
+-->
+
+<html>
+    <head>
+        <script src="screenshot.js"></script>
+        <script src="CanvasContext.js"></script>
+        <script src="Box.js"></script>
+        <script src="Blackout.js"></script>
+        <script src="Highlight.js"></script>
+        <script src="UserInput.js"></script>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div id="start-up" class="start-up">
+            <div class="welcome">
+                <img src="icons/camera128.png" />
+                <p>You just made a snapshot!</p>
+                <p>
+                    Use the <em>toolbar</em> to <em>highlight</em> areas of interest, 
+                    <em>blackout</em> sensitive information or <em>add</em> notes. 
+                </p>
+                <div>
+                    <input id="hide-welcome" type="checkbox">
+                    <label for="hide-welcome">No need to show this to me again</label>
+                </div>
+                <button id="got-it">Got it!</button>
+            </div> 
+            <img class="pointer" src="icons/next.png" />
+            <ul class="tools">
+                <li><div class="highlight"></div></li>
+                <li><div class="black-out"></div></li>
+                <li><div class="add-note"></div></li>
+                <li><div class="download"></div></li>
+            </ul>
+        </div>
+        
+        <canvas id="canvas"></canvas>
+        
+        <canvas id="overlay" class="overlay"></canvas>
+        
+        <ul id="tools" class="tools movable">
+            <li><button id="highlight" class="highlight"></button></li>
+            <li><button id="black-out" class="black-out"></button></li>
+            <li><button id="add-note" class="add-note"></button></li>
+            <li><button id="download" class="download"></button></li>
+        </ul>
+        
+        <!-- delete confirmation box for user input -->
+        <div id="confirmation" class="confirmation">
+            <p>Delete this note?</p>
+            <button id="delYes" class="delYes"></button>
+            <button id="delNo" class="delNo"></button>
+        </div>
+        
+        <!-- download notice -->
+        <div class="download-confirm">
+            <img src="icons/picture.png" />
+            <p>Your image has been <em>successfully saved</em> to your <em>download</em> folder.</p>
+            <button id="OK">OK</button>
+        </div>
+    </body>
+</html>
